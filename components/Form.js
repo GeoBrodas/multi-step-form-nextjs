@@ -8,9 +8,16 @@ function Form() {
   const [page, setPage] = useState(0);
   const [data, setData] = useState({
     name: '',
+    address: '',
+    zipcode: '',
+    city: '',
     email: '',
     phone: '',
     message: '',
+    agreement1: false,
+    agreement2: false,
+    agreement3: false,
+    agreement4: false,
   });
 
   const FormTitles = ['1/4', '2/4', '3/4', '4/4'];
@@ -19,16 +26,16 @@ function Form() {
     if (page === 0) {
       return <FirstPage />;
     } else if (page === 1) {
-      return <SecondPage />;
+      return <SecondPage data={data} setData={setData} />;
     } else if (page === 2) {
-      return <ThirdPage />;
+      return <ThirdPage data={data} setData={setData} />;
     } else if (page === 3) {
-      return <FourthPage />;
+      return <FourthPage data={data} setData={setData} />;
     }
   };
 
   return (
-    <div className="flex flex-col justify-between my-20">
+    <div className="flex h-4/5 w-auto mx-10 flex-col justify-between my-20">
       {/* Main form */}
       <div>
         <p className="text-center mx-auto font-semibold italic rounded-full p-2 bg-blue-200 h-10 w-10">
@@ -39,12 +46,58 @@ function Form() {
         {/* controls for form */}
         <div className="text-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-tr-lg rounded-bl-lg"
             onClick={() => {
-              if (page === FormTitles.length - 1) {
-                alert('This is the last page');
+              if (page === 1) {
+                // validation check for email address -> form1
+                if (
+                  !data.email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)
+                ) {
+                  alert('Invalid email address');
+                  return;
+                } else {
+                  setPage(page + 1);
+                  console.log(data);
+                }
+              } else if (page === 2) {
+                // validation checks for name, city, address, Zipcode -> form2
+                if (data.name === '') {
+                  alert('Name is required');
+                  return;
+                } else if (data.city === '') {
+                  alert('City is required');
+                  return;
+                } else if (data.address === '') {
+                  alert('Address is required');
+                  return;
+                } else if (data.zipcode === '') {
+                  alert('Zipcode is required');
+                  return;
+                } else {
+                  setPage(page + 1);
+                  console.log(data);
+                }
+              } else if (page === 3) {
+                // validation checks if all checkboxes are checked for agreement -> form4
+                if (data.agreement1 === false) {
+                  alert('You must agree to the Privacy Policy');
+                  return;
+                } else if (data.agreement2 === false) {
+                  alert('You must agree to the Terms of Service');
+                  return;
+                } else if (data.agreement3 === false) {
+                  alert('You must agree to the Terms of Use');
+                  return;
+                } else if (data.agreement4 === false) {
+                  alert('You must agree to the Miscellaneous');
+                  return;
+                } else {
+                  alert('Form submitted');
+                  console.log(data);
+                }
               } else {
-                setPage((currentPage) => currentPage + 1);
+                setPage(page + 1);
+                console.log(data);
               }
             }}
           >
