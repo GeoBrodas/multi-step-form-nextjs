@@ -92,7 +92,22 @@ function Form() {
                   alert('You must agree to the Miscellaneous');
                   return;
                 } else {
+                  // clear form and submit logic here
                   alert('Form submitted');
+                  setPage(0);
+                  setData({
+                    name: '',
+                    address: '',
+                    zipcode: '',
+                    city: '',
+                    email: '',
+                    phone: '',
+                    message: '',
+                    agreement1: false,
+                    agreement2: false,
+                    agreement3: false,
+                    agreement4: false,
+                  });
                   console.log(data);
                 }
               } else {
