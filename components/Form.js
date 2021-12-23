@@ -8,7 +8,7 @@ import ThirdPage from './steps/ThirdPage';
 
 function Form() {
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [disable, setDisabled] = useState(false);
   const [data, setData] = useState({
     name: '',
     address: '',
@@ -49,7 +49,8 @@ function Form() {
         {/* controls for form */}
         <div className="text-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-tr-lg rounded-bl-lg"
+            disabled={disable}
+            className="bg-blue-500 hover:bg-blue-700 disabled:bg-gray-50 disabled:text-gray-500 text-white font-bold py-2 px-4 rounded-tr-lg rounded-bl-lg"
             onClick={() => {
               if (page === 1) {
                 // validation check for email address -> form1
@@ -97,6 +98,7 @@ function Form() {
                 } else {
                   // make a axios post request to api route '/api/send-to-google-sheet' with data as the request body
                   const toastId = toast.loading('Submitting your response...');
+                  setDisabled(true);
                   axios
                     .post('/api/send-to-google-sheet', data)
                     .then((res) => {
@@ -124,6 +126,7 @@ function Form() {
                       console.log(err);
                     });
                   console.log(data);
+                  setDisabled(false);
                 }
               } else {
                 setPage(page + 1);

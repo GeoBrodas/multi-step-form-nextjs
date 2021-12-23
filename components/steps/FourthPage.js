@@ -7,6 +7,7 @@ function FourthPage({ data, setData }) {
       {/* Input select fields for a legal checklist */}
       <div className="flex py-4 w-72 flex-col space-y-4">
         <Checkbox
+          paragraph="I have read and agree to the terms and conditions."
           data={data}
           number="1"
           name="Privacy Policy"
@@ -15,6 +16,7 @@ function FourthPage({ data, setData }) {
           setData={setData}
         />
         <Checkbox
+          paragraph="I have read and agree to the terms and conditions."
           data={data}
           number="2"
           name="Terms of Service"
@@ -23,6 +25,7 @@ function FourthPage({ data, setData }) {
           setData={setData}
         />
         <Checkbox
+          paragraph="I have read and agree to the terms and conditions."
           data={data}
           number="3"
           name="Terms of Use"
@@ -31,6 +34,7 @@ function FourthPage({ data, setData }) {
           setData={setData}
         />
         <Checkbox
+          paragraph="I have read and agree to the terms and conditions."
           data={data}
           number="4"
           name="Miscellaneous"
