@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import FirstPage from './steps/FirstPage';
 import FourthPage from './steps/FourthPage';
 import SecondPage from './steps/SecondPage';
@@ -6,6 +8,7 @@ import ThirdPage from './steps/ThirdPage';
 
 function Form() {
   const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     name: '',
     address: '',
@@ -92,22 +95,34 @@ function Form() {
                   alert('You must agree to the Miscellaneous');
                   return;
                 } else {
-                  // clear form and submit logic here
-                  alert('Form submitted');
-                  setPage(0);
-                  setData({
-                    name: '',
-                    address: '',
-                    zipcode: '',
-                    city: '',
-                    email: '',
-                    phone: '',
-                    message: '',
-                    agreement1: false,
-                    agreement2: false,
-                    agreement3: false,
-                    agreement4: false,
-                  });
+                  // make a axios post request to api route '/api/send-to-google-sheet' with data as the request body
+                  const toastId = toast.loading('Submitting your response...');
+                  axios
+                    .post('/api/send-to-google-sheet', data)
+                    .then((res) => {
+                      // console.log(res);
+                      toast.dismiss(toastId);
+                      alert('Form submitted');
+                      setPage(0);
+                      setData({
+                        name: '',
+                        address: '',
+                        zipcode: '',
+                        city: '',
+                        email: '',
+                        phone: '',
+                        message: '',
+                        agreement1: false,
+                        agreement2: false,
+                        agreement3: false,
+                        agreement4: false,
+                      });
+                    })
+                    .catch((err) => {
+                      toast.dismiss(toastId);
+                      alert(err + '\n' + 'Try again later');
+                      console.log(err);
+                    });
                   console.log(data);
                 }
               } else {
@@ -116,7 +131,7 @@ function Form() {
               }
             }}
           >
-            {page === 0 ? 'Start' : 'Next'}
+            {page === 0 ? 'Start' : page === 3 ? 'Submit' : 'Next'}
           </button>
         </div>
       </div>
