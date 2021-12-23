@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import FifthPage from './steps/FifthPage';
 import FirstPage from './steps/FirstPage';
 import FourthPage from './steps/FourthPage';
 import SecondPage from './steps/SecondPage';
@@ -23,7 +24,7 @@ function Form() {
     agreement4: false,
   });
 
-  const FormTitles = ['1/4', '2/4', '3/4', '4/4'];
+  const FormTitles = ['1/5', '2/5', '3/5', '4/5', '5/5'];
 
   const ConditionalComponent = () => {
     if (page === 0) {
@@ -34,6 +35,8 @@ function Form() {
       return <ThirdPage data={data} setData={setData} />;
     } else if (page === 3) {
       return <FourthPage data={data} setData={setData} />;
+    } else if (page === 4) {
+      return <FifthPage />;
     }
   };
 
@@ -105,7 +108,6 @@ function Form() {
                       // console.log(res);
                       toast.dismiss(toastId);
                       alert('Form submitted');
-                      setPage(0);
                       setData({
                         name: '',
                         address: '',
@@ -125,16 +127,25 @@ function Form() {
                       alert(err + '\n' + 'Try again later');
                       console.log(err);
                     });
+                  setPage(page + 1);
                   console.log(data);
                   setDisabled(false);
                 }
+              } else if (page === 4) {
+                setPage(0);
               } else {
                 setPage(page + 1);
                 console.log(data);
               }
             }}
           >
-            {page === 0 ? 'Start' : page === 3 ? 'Submit' : 'Next'}
+            {page === 0
+              ? 'Start'
+              : page === 3
+              ? 'Submit'
+              : page === 4
+              ? 'Complete Process'
+              : 'Next'}
           </button>
         </div>
       </div>
