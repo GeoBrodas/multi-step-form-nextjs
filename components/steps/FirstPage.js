@@ -18,7 +18,10 @@ function FirstPage() {
 
         {/* Title */}
         <h1 className="text-center text-3xl font-bold my-5">
-          Welcome to the Multi-Step Form
+          Welcome to the{' '}
+          <span className="bg-clip-text italic text-transparent bg-gradient-to-r from-pink-400 via bg-orange-200 to-red-600">
+            Multi-Step Form
+          </span>
         </h1>
 
         {/* Description */}

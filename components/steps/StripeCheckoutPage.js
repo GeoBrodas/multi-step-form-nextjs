@@ -11,10 +11,10 @@ function StripeCheckoutPage() {
   return (
     <Fade>
       {/* A form for checking out a stripe payment */}
-      <div className="w-3/6 mx-auto my-10 flex flex-col">
+      <div className="w-5/6 md:w-3/6 mx-auto my-10 flex flex-col">
         <form action="/api/pay-via-stripe" method="post">
           <div className="flex flex-col text-center space-y-4">
-            <p className="text-2xl font-semibold">
+            <p className="text-3xl font-semibold">
               Donate to{' '}
               <span className="text-transparent text-3xl bg-clip-text bg-gradient-to-br from-blue-400 to-red-600">
                 #TeamSeas
@@ -30,7 +30,7 @@ function StripeCheckoutPage() {
             </p>
 
             <button
-              className="bg-pink-500 p-4 text-lg w-1/5 mx-auto rounded-r-full rounded-l-full text-white font-semibold hover:scale-105 transition duration-75 ease-in-out"
+              className="bg-pink-500 p-4 text-base md:text-lg w-3/5 md:w-1/5 mx-auto rounded-r-full rounded-l-full text-white font-semibold md:hover:scale-105 transition duration-75 ease-in-out"
               type="submit"
             >
               Donate $10

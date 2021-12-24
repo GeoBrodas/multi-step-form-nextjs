@@ -15,6 +15,7 @@ async function handler(req, res) {
       agreement2,
       agreement3,
       agreement4,
+      isPaid,
     } = req.body;
 
     const auth = new google.auth.GoogleAuth({
@@ -35,6 +36,26 @@ async function handler(req, res) {
       version: 'v4',
     });
 
+    // check if email is already available
+    //   get all rows from sheet
+    const getRowData = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
+      range: 'Sheet1!A2:K',
+    });
+
+    const rowData = getRowData.data.values;
+
+    //   check if email is already available
+    const emailExists = rowData.some((row) => row[2] === email);
+
+    //   if email is already available, return with error response
+    if (emailExists) {
+      return res.status(400).json({
+        message:
+          'Email already exists, your submission will be considered invalid',
+      });
+    }
+
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
       range: 'Sheet1!A2:K',
@@ -53,6 +74,7 @@ async function handler(req, res) {
             agreement2,
             agreement3,
             agreement4,
+            isPaid,
           ],
         ],
       },

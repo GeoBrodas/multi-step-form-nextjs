@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Footer from 'Layouts/Footer';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import FifthPage from './steps/FifthPage';
@@ -22,6 +23,7 @@ function Form() {
     agreement2: false,
     agreement3: false,
     agreement4: false,
+    isPaid: false,
   });
 
   const FormTitles = ['1/5', '2/5', '3/5', '4/5', '5/5'];
@@ -106,7 +108,6 @@ function Form() {
                     .post('/api/send-to-google-sheet', data)
                     .then((res) => {
                       // console.log(res);
-                      toast.dismiss(toastId);
                       alert('Form submitted');
                       setData({
                         name: '',
@@ -120,11 +121,18 @@ function Form() {
                         agreement2: false,
                         agreement3: false,
                         agreement4: false,
+                        isPaid: false,
                       });
+                      toast.dismiss(toastId);
                     })
                     .catch((err) => {
                       toast.dismiss(toastId);
-                      alert(err + '\n' + 'Try again later');
+                      // display error message from server
+                      alert(
+                        err.response.data.message ||
+                          err ||
+                          'Something went wrong'
+                      );
                       console.log(err);
                     });
                   setPage(page + 1);
@@ -144,28 +152,14 @@ function Form() {
               : page === 3
               ? 'Submit'
               : page === 4
-              ? 'Complete Process'
+              ? 'Complete Form'
               : 'Next'}
           </button>
         </div>
       </div>
 
-      {/* footer */}
-      <div className="text-center mt-10">
-        <p className="text-sm text-gray-500">
-          {/* Copyright */}
-          &copy; {new Date().getFullYear()}
-          {/* Company */}{' '}
-          <a
-            className="text-gray-500"
-            href="https://www.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Your company name
-          </a>
-        </p>
-      </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
