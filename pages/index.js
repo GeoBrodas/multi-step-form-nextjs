@@ -1,4 +1,5 @@
 import Form from '@/components/Form';
+import Wrapper from 'Layouts/Wrapper';
 import Head from 'next/head';
 
 export default function Home() {
@@ -10,9 +11,9 @@ export default function Home() {
       </Head>
 
       {/* Main div */}
-      <div className="grid h-screen place-content-center">
+      <Wrapper>
         <Form />
-      </div>
+      </Wrapper>
     </div>
   );
 }

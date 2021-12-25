@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Footer from 'Layouts/Footer';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import FifthPage from './steps/FifthPage';
@@ -10,7 +11,9 @@ import ThirdPage from './steps/ThirdPage';
 
 function Form() {
   const [page, setPage] = useState(0);
-  const [disable, setDisabled] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const router = useRouter();
   const [data, setData] = useState({
     name: '',
     address: '',
@@ -37,10 +40,44 @@ function Form() {
       return <ThirdPage data={data} setData={setData} />;
     } else if (page === 3) {
       return <FourthPage data={data} setData={setData} />;
-    } else if (page === 4) {
+    } else if (!errorMessage && page === 4) {
       return <FifthPage />;
     }
   };
+
+  function disableHandler() {
+    if (page === 1) {
+      if (data.email === '') {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (page === 2) {
+      if (
+        data.address === '' ||
+        data.zipcode === '' ||
+        data.city === '' ||
+        data.name === ''
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (page === 3) {
+      if (
+        data.agreement1 === false ||
+        data.agreement2 === false ||
+        data.agreement3 === false ||
+        data.agreement4 === false
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 
   return (
     <div className="flex h-4/5 w-auto mx-10 flex-col justify-between my-20">
@@ -54,8 +91,8 @@ function Form() {
         {/* controls for form */}
         <div className="text-center">
           <button
-            disabled={disable}
-            className="bg-blue-500 hover:bg-blue-700 disabled:bg-gray-50 disabled:text-gray-500 text-white font-bold py-2 px-4 rounded-tr-lg rounded-bl-lg"
+            disabled={disableHandler()}
+            className="bg-blue-500 hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 text-white font-bold py-2 px-4 rounded-tr-lg rounded-bl-lg"
             onClick={() => {
               if (page === 1) {
                 // validation check for email address -> form1
@@ -103,7 +140,7 @@ function Form() {
                 } else {
                   // make a axios post request to api route '/api/send-to-google-sheet' with data as the request body
                   const toastId = toast.loading('Submitting your response...');
-                  setDisabled(true);
+
                   axios
                     .post('/api/send-to-google-sheet', data)
                     .then((res) => {
@@ -127,17 +164,22 @@ function Form() {
                     })
                     .catch((err) => {
                       toast.dismiss(toastId);
+                      setErrorMessage(err.response.data.message);
                       // display error message from server
-                      alert(
-                        err.response.data.message ||
-                          err ||
-                          'Something went wrong'
+                      // alert(
+                      //   err.response.data.message ||
+                      //     err ||
+                      //     'Something went wrong'
+                      // );
+                      router.push('/submission/alreadyexists');
+                      console.log(
+                        err.response.data.message || 'something went wrong'
                       );
-                      console.log(err);
                     });
-                  setPage(page + 1);
+                  if (!errorMessage) {
+                    setPage(page + 1);
+                  }
                   console.log(data);
-                  setDisabled(false);
                 }
               } else if (page === 4) {
                 setPage(0);

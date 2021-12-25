@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Fade } from 'react-reveal';
 
 function FirstPage() {
@@ -29,6 +30,12 @@ function FirstPage() {
           This is a multi-step form. It will help you to get the best experience
           from our website.
         </p>
+
+        <Link href="/our-mission">
+          <a className="underline text-gray-400 hover:text-gray-500">
+            Watch the full tutorial here.
+          </a>
+        </Link>
       </div>
     </Fade>
   );
