@@ -30,7 +30,7 @@ function StripeCheckoutPage() {
             </p>
 
             <button
-              className="bg-pink-500 p-4 text-base md:text-lg w-3/5 md:w-1/5 mx-auto rounded-r-full rounded-l-full text-white font-semibold md:hover:scale-105 transition duration-75 ease-in-out"
+              className="bg-pink-500 p-4 text-base md:text-lg w-3/5 md:w-2/5 lg:w-1/5 mx-auto rounded-r-full rounded-l-full text-white font-semibold md:hover:scale-105 transition duration-75 ease-in-out"
               type="submit"
             >
               Donate $10
