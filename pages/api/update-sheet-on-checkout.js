@@ -38,10 +38,10 @@ async function handler(req, res) {
     (row) => row[2] === data.object.customer_details.email
   );
 
-  //   if no index found , return with error response
-  if (index < 0 || !index) {
-    return res.status(400).send('No such email found');
-  }
+  // //   if no index found , return with error response
+  // if (index < 0 || !index) {
+  //   return res.status(400).send('No such email found');
+  // }
 
   //   console.log(index + 2);
   const actualIndex = index + 2;
