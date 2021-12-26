@@ -15,8 +15,8 @@ async function handler(req, res) {
           },
         ],
         mode: 'payment',
-        success_url: `http://localhost:3000/donate/?success=true`,
-        cancel_url: `http://localhost:3000/donate/?canceled=true`,
+        success_url: `https://bijlse-form.vercel.app/donate/?success=true`,
+        cancel_url: `https://bijlse-form.vercel.app/donate/?canceled=true`,
       });
 
       res.redirect(303, session.url);
