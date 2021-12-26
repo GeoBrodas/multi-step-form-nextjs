@@ -38,6 +38,8 @@ async function handler(req, res) {
     (row) => row[2] === data.object.customer_details.email
   );
 
+  console.log(index);
+
   // //   if no index found , return with error response
   // if (index < 0 || !index) {
   //   return res.status(400).send('No such email found');
@@ -60,13 +62,13 @@ async function handler(req, res) {
       if (err) {
         res.send(err);
       } else {
-        res.send({ message: 'OK', response });
+        res.send({ message: 'OK', index, response });
         console.log(response);
       }
     }
   );
 
-  res.status(200).send({ message: 'OK', updatedResponse });
+  res.status(200).send({ message: 'OK', index, updatedResponse });
 }
 
 export default handler;
