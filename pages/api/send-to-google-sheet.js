@@ -46,7 +46,7 @@ async function handler(req, res) {
     const rowData = getRowData.data.values;
 
     //   check if email is already available
-    const emailExists = rowData.some((row) => row[2] === email);
+    const emailExists = rowData?.some((row) => row[2] === email);
 
     //   if email is already available, return with error response
     if (emailExists) {
