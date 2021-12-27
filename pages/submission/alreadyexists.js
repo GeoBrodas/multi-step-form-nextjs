@@ -6,7 +6,7 @@ function UserAlreadyExists({ errorMessage }) {
   return (
     <div className="grid h-screen place-content-center">
       <Head>
-        <title>User already exists</title>
+        <title>Something went wrong!</title>
       </Head>
 
       <div className="mx-auto flex flex-col space-y-10">

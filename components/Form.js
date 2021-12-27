@@ -173,7 +173,9 @@ function Form() {
                       // );
                       router.push('/submission/alreadyexists');
                       console.log(
-                        err.response.data.message || 'something went wrong'
+                        err.response.data.message ||
+                          err ||
+                          'something went wrong'
                       );
                     });
                   if (!errorMessage) {
