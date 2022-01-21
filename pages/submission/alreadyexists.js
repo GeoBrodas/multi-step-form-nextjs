@@ -13,7 +13,7 @@ function UserAlreadyExists({ errorMessage }) {
         <Notification
           message={
             errorMessage ||
-            'Something went wrong! Please try again later or try contacting the developer'
+            'You cannot submit any survey right now, this maybe means that - '
           }
         />
 

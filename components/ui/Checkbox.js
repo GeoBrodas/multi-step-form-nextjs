@@ -15,7 +15,6 @@ function Checkbox({
           id={`checkbox${number}`}
           name={name}
           value={name}
-          // customize checkbox using tailwindcss
           className="form-checkbox h-4 w-4"
           checked={agreement}
           onChange={(e) =>

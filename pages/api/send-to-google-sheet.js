@@ -16,6 +16,7 @@ async function handler(req, res) {
       agreement3,
       agreement4,
       isPaid,
+      s3imageUrl,
     } = req.body;
 
     const auth = new google.auth.GoogleAuth({
@@ -75,6 +76,7 @@ async function handler(req, res) {
             agreement3,
             agreement4,
             isPaid,
+            s3imageUrl,
           ],
         ],
       },

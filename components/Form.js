@@ -8,6 +8,7 @@ import FirstPage from './steps/FirstPage';
 import FourthPage from './steps/FourthPage';
 import SecondPage from './steps/SecondPage';
 import ThirdPage from './steps/ThirdPage';
+import UploadPage from './steps/UploadPage';
 
 function Form() {
   const [page, setPage] = useState(0);
@@ -26,10 +27,21 @@ function Form() {
     agreement2: false,
     agreement3: false,
     agreement4: false,
+    s3imageUrl: null,
     isPaid: false,
   });
 
-  const FormTitles = ['1/5', '2/5', '3/5', '4/5', '5/5'];
+  const FormTitles = [
+    '1/9',
+    '2/9',
+    '3/9',
+    '4/9',
+    '5/9',
+    '6/9',
+    '7/9',
+    '8/9',
+    '9/9',
+  ];
 
   const ConditionalComponent = () => {
     if (page === 0) {
@@ -39,8 +51,10 @@ function Form() {
     } else if (page === 2) {
       return <ThirdPage data={data} setData={setData} />;
     } else if (page === 3) {
+      return <UploadPage data={data} setData={setData} />;
+    } else if (page === 4) {
       return <FourthPage data={data} setData={setData} />;
-    } else if (!errorMessage && page === 4) {
+    } else if (!errorMessage && page === 5) {
       return <FifthPage />;
     }
   };
@@ -64,6 +78,12 @@ function Form() {
         return false;
       }
     } else if (page === 3) {
+      if (data.s3imageUrl === null) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (page === 4) {
       if (
         data.agreement1 === false ||
         data.agreement2 === false ||
@@ -74,8 +94,6 @@ function Form() {
       } else {
         return false;
       }
-    } else {
-      return false;
     }
   }
 
@@ -124,6 +142,15 @@ function Form() {
                   console.log(data);
                 }
               } else if (page === 3) {
+                // validation check for image upload -> form3
+                if (data.s3imageUrl === null) {
+                  alert('Image is required');
+                  return;
+                } else {
+                  setPage(page + 1);
+                  console.log(data);
+                }
+              } else if (page === 4) {
                 // validation checks if all checkboxes are checked for agreement -> form4
                 if (data.agreement1 === false) {
                   alert('You must agree to the Privacy Policy');
@@ -145,7 +172,8 @@ function Form() {
                     .post('/api/send-to-google-sheet', data)
                     .then((res) => {
                       // console.log(res);
-                      alert('Form submitted');
+                      toast.dismiss(toastId);
+                      toast.success('Your response has been submitted!');
                       setData({
                         name: '',
                         address: '',
@@ -158,13 +186,14 @@ function Form() {
                         agreement2: false,
                         agreement3: false,
                         agreement4: false,
+                        s3imageUrl: null,
                         isPaid: false,
                       });
-                      toast.dismiss(toastId);
                     })
                     .catch((err) => {
                       toast.dismiss(toastId);
-                      setErrorMessage(err.response.data.message);
+                      toast.error('Something went wrong!');
+                      setErrorMessage(err?.response.data.message);
                       // display error message from server
                       // alert(
                       //   err.response.data.message ||
@@ -183,7 +212,7 @@ function Form() {
                   }
                   console.log(data);
                 }
-              } else if (page === 4) {
+              } else if (page === 5) {
                 setPage(0);
               } else {
                 setPage(page + 1);
@@ -193,9 +222,9 @@ function Form() {
           >
             {page === 0
               ? 'Start'
-              : page === 3
-              ? 'Submit'
               : page === 4
+              ? 'Submit'
+              : page === 5
               ? 'Complete Form'
               : 'Next'}
           </button>
