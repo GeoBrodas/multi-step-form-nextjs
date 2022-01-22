@@ -10,4 +10,12 @@
   .gradient-text {
     @apply bg-clip-text italic text-transparent bg-gradient-to-r from-pink-400 via-orange-500 to-red-600;
   }
+
+  .PhoneInput input {
+    @apply h-10 input-style-base ml-2;
+  }
+
+  .PhoneInput select {
+    @apply flex flex-row input-style-base w-28 h-10;
+  }
 }

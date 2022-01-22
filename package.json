@@ -19,6 +19,7 @@
     "react-dropzone": "^11.5.1",
     "react-hot-toast": "^2.1.1",
     "react-icons": "^4.3.1",
+    "react-phone-number-input": "^3.1.44",
     "react-player": "^2.9.0",
     "react-reveal": "^1.2.2",
     "stripe": "^8.195.0"

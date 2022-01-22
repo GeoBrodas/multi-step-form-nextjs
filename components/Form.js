@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import FifthPage from './steps/FifthPage';
 import FirstPage from './steps/FirstPage';
 import FourthPage from './steps/FourthPage';
+import ImagesSelectPage from './steps/ImagesSelectPage';
 import SecondPage from './steps/SecondPage';
 import ThirdPage from './steps/ThirdPage';
 import UploadPage from './steps/UploadPage';
@@ -27,6 +28,10 @@ function Form() {
     agreement2: false,
     agreement3: false,
     agreement4: false,
+    image1: false,
+    image2: false,
+    image3: false,
+    image4: false,
     s3imageUrl: null,
     isPaid: false,
   });
@@ -53,8 +58,10 @@ function Form() {
     } else if (page === 3) {
       return <UploadPage data={data} setData={setData} />;
     } else if (page === 4) {
+      return <ImagesSelectPage data={data} setData={setData} />;
+    } else if (page === 5) {
       return <FourthPage data={data} setData={setData} />;
-    } else if (!errorMessage && page === 5) {
+    } else if (!errorMessage && page === 6) {
       return <FifthPage />;
     }
   };
@@ -84,6 +91,17 @@ function Form() {
         return false;
       }
     } else if (page === 4) {
+      if (
+        data.image1 === false &&
+        data.image2 === false &&
+        data.image3 === false &&
+        data.image4 === false
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (page === 5) {
       if (
         data.agreement1 === false ||
         data.agreement2 === false ||
@@ -151,6 +169,20 @@ function Form() {
                   console.log(data);
                 }
               } else if (page === 4) {
+                // validation check for image upload -> form4
+                if (
+                  data.image1 === false &&
+                  data.image2 === false &&
+                  data.image3 === false &&
+                  data.image4 === false
+                ) {
+                  alert('Atleast one image is to be selected');
+                  return;
+                } else {
+                  setPage(page + 1);
+                  console.log(data);
+                }
+              } else if (page === 5) {
                 // validation checks if all checkboxes are checked for agreement -> form4
                 if (data.agreement1 === false) {
                   alert('You must agree to the Privacy Policy');
@@ -186,6 +218,10 @@ function Form() {
                         agreement2: false,
                         agreement3: false,
                         agreement4: false,
+                        image1: false,
+                        image2: false,
+                        image3: false,
+                        image4: false,
                         s3imageUrl: null,
                         isPaid: false,
                       });
@@ -212,7 +248,7 @@ function Form() {
                   }
                   console.log(data);
                 }
-              } else if (page === 5) {
+              } else if (page === 6) {
                 setPage(0);
               } else {
                 setPage(page + 1);
@@ -222,9 +258,9 @@ function Form() {
           >
             {page === 0
               ? 'Start'
-              : page === 4
-              ? 'Submit'
               : page === 5
+              ? 'Submit'
+              : page === 6
               ? 'Complete Form'
               : 'Next'}
           </button>
