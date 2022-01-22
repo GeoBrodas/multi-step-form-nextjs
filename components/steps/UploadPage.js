@@ -44,6 +44,7 @@ const myBucket = new AWS.S3({
     Bucket: S3_BUCKET,
   },
   region: REGION,
+  signatureVersion: 'v4',
 });
 
 function UploadPage({ data, setData }) {
@@ -70,6 +71,7 @@ function UploadPage({ data, setData }) {
 
   function uploadHandler(file) {
     const fileData = file[0];
+    console.log(fileData);
 
     const params = {
       ACL: 'public-read',
