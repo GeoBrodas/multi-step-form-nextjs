@@ -7,6 +7,7 @@ import FifthPage from './steps/FifthPage';
 import FirstPage from './steps/FirstPage';
 import FourthPage from './steps/FourthPage';
 import ImagesSelectPage from './steps/ImagesSelectPage';
+import ScatteredImagesPage from './steps/ScatteredImagesPage';
 import SecondPage from './steps/SecondPage';
 import ThirdPage from './steps/ThirdPage';
 import UploadPage from './steps/UploadPage';
@@ -48,6 +49,7 @@ function Form() {
     '9/9',
   ];
 
+  // order in which the components are rendered -> check /components/steps
   const ConditionalComponent = () => {
     if (page === 0) {
       return <FirstPage />;
@@ -60,12 +62,15 @@ function Form() {
     } else if (page === 4) {
       return <ImagesSelectPage data={data} setData={setData} />;
     } else if (page === 5) {
+      return <ScatteredImagesPage />;
+    } else if (page === 6) {
       return <FourthPage data={data} setData={setData} />;
-    } else if (!errorMessage && page === 6) {
+    } else if (!errorMessage && page === 7) {
       return <FifthPage />;
     }
   };
 
+  // for disabling the button if no input is provided
   function disableHandler() {
     if (page === 1) {
       if (data.email === '') {
@@ -101,7 +106,7 @@ function Form() {
       } else {
         return false;
       }
-    } else if (page === 5) {
+    } else if (page === 6) {
       if (
         data.agreement1 === false ||
         data.agreement2 === false ||
@@ -182,7 +187,7 @@ function Form() {
                   setPage(page + 1);
                   console.log(data);
                 }
-              } else if (page === 5) {
+              } else if (page === 6) {
                 // validation checks if all checkboxes are checked for agreement -> form4
                 if (data.agreement1 === false) {
                   alert('You must agree to the Privacy Policy');
@@ -248,7 +253,7 @@ function Form() {
                   }
                   console.log(data);
                 }
-              } else if (page === 6) {
+              } else if (page === 7) {
                 setPage(0);
               } else {
                 setPage(page + 1);
@@ -258,9 +263,9 @@ function Form() {
           >
             {page === 0
               ? 'Start'
-              : page === 5
-              ? 'Submit'
               : page === 6
+              ? 'Submit'
+              : page === 7
               ? 'Complete Form'
               : 'Next'}
           </button>

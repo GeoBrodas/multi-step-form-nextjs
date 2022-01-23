@@ -100,7 +100,7 @@ function UploadPage({ data, setData }) {
     <div className="p-4 flex flex-col space-y-4">
       <p className="font-bold text-xl">Upload Required documents</p>
 
-      <section>
+      <section className="cursor-pointer">
         <div {...getRootProps({ style })}>
           <input {...getInputProps()} />
           <p>Drag and drop some files here, or click to select files</p>
