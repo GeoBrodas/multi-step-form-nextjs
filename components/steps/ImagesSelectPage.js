@@ -21,8 +21,8 @@ function ImagesSelectPage({ data, setData }) {
           <Image
             alt="image1"
             src="https://images.unsplash.com/photo-1642364706722-2ad555e54cd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViM3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            width="150"
-            height="100"
+            width="190"
+            height="110"
           />
         </div>
         <div className="flex">
@@ -38,8 +38,8 @@ function ImagesSelectPage({ data, setData }) {
           <Image
             alt="image2"
             src="https://images.unsplash.com/photo-1642364706722-2ad555e54cd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViM3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            width="150"
-            height="100"
+            width="190"
+            height="110"
           />
         </div>
         <div className="flex">
@@ -55,8 +55,8 @@ function ImagesSelectPage({ data, setData }) {
           <Image
             alt="image3"
             src="https://images.unsplash.com/photo-1642364706722-2ad555e54cd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViM3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            width="150"
-            height="100"
+            width="190"
+            height="110"
           />
         </div>
         <div className="flex">
@@ -72,8 +72,8 @@ function ImagesSelectPage({ data, setData }) {
           <Image
             alt="image4"
             src="https://images.unsplash.com/photo-1642364706722-2ad555e54cd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViM3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-            width="150"
-            height="100"
+            width="190"
+            height="110"
           />
         </div>
       </div>

@@ -3,6 +3,7 @@ import Footer from 'Layouts/Footer';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import CheckList from './steps/CheckList';
 import FifthPage from './steps/FifthPage';
 import FirstPage from './steps/FirstPage';
 import FourthPage from './steps/FourthPage';
@@ -64,8 +65,10 @@ function Form() {
     } else if (page === 5) {
       return <ScatteredImagesPage />;
     } else if (page === 6) {
+      return <CheckList data={data} />;
+    } else if (page === 7) {
       return <FourthPage data={data} setData={setData} />;
-    } else if (!errorMessage && page === 7) {
+    } else if (!errorMessage && page === 8) {
       return <FifthPage />;
     }
   };
@@ -106,7 +109,7 @@ function Form() {
       } else {
         return false;
       }
-    } else if (page === 6) {
+    } else if (page === 7) {
       if (
         data.agreement1 === false ||
         data.agreement2 === false ||
@@ -187,7 +190,7 @@ function Form() {
                   setPage(page + 1);
                   console.log(data);
                 }
-              } else if (page === 6) {
+              } else if (page === 7) {
                 // validation checks if all checkboxes are checked for agreement -> form4
                 if (data.agreement1 === false) {
                   alert('You must agree to the Privacy Policy');
@@ -253,7 +256,7 @@ function Form() {
                   }
                   console.log(data);
                 }
-              } else if (page === 7) {
+              } else if (page === 8) {
                 setPage(0);
               } else {
                 setPage(page + 1);
@@ -263,9 +266,9 @@ function Form() {
           >
             {page === 0
               ? 'Start'
-              : page === 6
-              ? 'Submit'
               : page === 7
+              ? 'Submit'
+              : page === 8
               ? 'Complete Form'
               : 'Next'}
           </button>
